@@ -66,7 +66,7 @@ function getPathOfPathPart($path) {
 
 function filter_files($file) {
   global $rootShareFolder, $folderAbsolute;
-  $filterFiles = [".", "..", "index.php", "favicon.ico", ".htaccess", ".htpasswd"];
+  $filterFiles = [".", "..", "index.php", "favicon.ico", ".htaccess", ".htpasswd", "dl.php"];
   if (in_array($file, $filterFiles)) return true;
   if ($folderAbsolute == $rootShareFolder && $file == "includes") return true;
   return false;
