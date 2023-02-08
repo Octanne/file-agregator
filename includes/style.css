@@ -1,0 +1,23 @@
+.file-selectable:hover {
+    cursor: pointer;
+    border-color: orange !important;
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.nothing-file {
+    cursor: not-allowed;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.custom-popover {
+    --bs-popover-max-width: 20em;
+    --bs-popover-border-color: var(--bs-warning);
+    --bs-popover-header-bg: var(--bs-warning);
+    --bs-popover-header-color: var(--bs-white);
+    --bs-popover-body-padding-x: 1rem;
+    --bs-popover-body-padding-y: .5rem;
+  }
+  
