@@ -84,8 +84,9 @@ foreach ($pathParts as $key => $value) {
       <li class="breadcrumb-item active" aria-current="page">$key</li>
     HTML;
   } else {
+    $valMod = urlencode($value);
     $pathS .= <<<HTML
-      <li class="breadcrumb-item" aria-current="page"><a href="?folder={urlencode($value)}">$key</a></li>
+      <li class="breadcrumb-item" aria-current="page"><a href="?folder=$valMod">$key</a></li>
     HTML;
   }
 }
