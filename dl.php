@@ -10,9 +10,13 @@ if(isset($_GET["file"])){
         $pathR = realpath($rootShareFolder.$file);
 
         if ($pathR == false) {
-            die("Invalid file name 2 !");
+            die("The path '$rootShareFolder$file' is incorrect!");
         } else {
             $folderAbsolute = $pathR;
+        }
+
+        if (str_contains($folderAbsolute, $rootShareFolder) == false) {
+            die("The path '$folderAbsolute' is not in the share folder!");
         }
 
         // Process download
@@ -32,7 +36,7 @@ if(isset($_GET["file"])){
             die();
         }
     } else {
-        die("Invalid file name 1 !");
+        die("The file '$rootShareFolder$file' is not found!");
     }
 } else {
     die("No file specified!");

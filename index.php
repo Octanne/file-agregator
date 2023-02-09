@@ -1,6 +1,9 @@
 <?php
 ini_set('display_errors', 1);
 
+$nameWebsite = "Octanne's files";
+$titleWebsite = "Octanne | Files";
+$footerText = "Files agregator | Made with <i class='bi bi-heart-fill'></i> by Octanne | 2020-2023";
 $rootShareFolder = getcwd()."/";
 
 $folderIcon = <<<HTML
@@ -34,20 +37,24 @@ function icon_file($file) {
 }
 
 // Get path of the folder to display
-if (isset($_GET['folder'])) {
-  $folderDecode = urldecode($_GET['folder']);
-  if ($folderDecode != "" && is_dir($rootShareFolder.$folderDecode)) {
+if (isset($_GET['folder'])) { // Si le paramètre "folder" est défini
+  $folderDecode = urldecode($_GET['folder']); // Decode URL-encoded string
+  if ($folderDecode != "" && is_dir($rootShareFolder.$folderDecode)) { // Si le dossier existe
     $pathR = realpath($rootShareFolder.$folderDecode);
     if ($pathR == false) {
-      $folderAbsolute = $rootShareFolder; 
+      $folderAbsolute = $rootShareFolder;  // Utiliser le dossier racine
     } else {
-      $folderAbsolute = $pathR."/";
+      if (str_contains($pathR, getcwd())) {
+        $folderAbsolute = $pathR."/"; // Utiliser le dossier demandé
+      } else {
+        $folderAbsolute = $rootShareFolder; // Utiliser le dossier racine
+      }
     }
   } else {
-    $folderAbsolute = $rootShareFolder;
+    $folderAbsolute = $rootShareFolder; // Utiliser le dossier racine
   }
 } else {
-  $folderAbsolute = $rootShareFolder;
+  $folderAbsolute = $rootShareFolder; // Utiliser le dossier racine
 }
 
 // Get the path relative to the root folder
@@ -67,9 +74,9 @@ function getPathOfPathPart($path) {
 function filter_files($file) {
   global $rootShareFolder, $folderAbsolute;
   $filterFiles = [".", ".."];
-  $filterFileFirstPage = ["index.php", "favicon.ico", ".htaccess", ".htpasswd", "dl.php"];
+  $filterFileFirstPage = ["index.php", "favicon.ico", ".htaccess", ".htpasswd", "dl.php", "includes"];
   if (in_array($file, $filterFiles)) return true;
-  if ($folderAbsolute == $rootShareFolder && in_array($file, $filterFileFirstPage)) return true;
+  if ($folderAbsolute == $rootShareFolder && (in_array($file, $filterFileFirstPage))) return true;
   return false;
 }
 
@@ -148,7 +155,7 @@ echo <<<HTML
 <html lang="">
   <head>
     <meta charset="utf-8">
-    <title>Octanne | Share</title>
+    <title>$titleWebsite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Octanne's sharespace">
     <meta name="author" content="Octanne">
@@ -161,10 +168,10 @@ echo <<<HTML
     <div class="container">
       <nav class="navbar fixed-top bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid justify-content-between">
-          <a class="navbar-brand" href="#">Octanne's sharespace</a>
+          <a class="navbar-brand" href="#">$nameWebsite</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="https://octanne.eu">Back to site</a>
+              <a type="button" class="btn btn-outline-secondary" href="https://octanne.eu">Back to site</a>
             </li>
           </ul>
         </div>
@@ -183,7 +190,7 @@ echo <<<HTML
 
       <nav class="navbar fixed-bottom bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid text-align-center justify-content-center">
-          <p class="navbar-text m-0" style="text-decoration: underline;" href="#">Octanne | Agregator of share files | 2020-2023</p>
+          <p class="navbar-text m-0" style="text-decoration: bold;" href="#">$footerText</p>
         </div>
       </nav>
 
