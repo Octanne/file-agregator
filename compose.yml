@@ -1,0 +1,9 @@
+services:
+  php:
+    build: 
+      context: .
+      target: php
+    volumes:
+      - ./files:/var/www/html/files
+    ports:
+      - 80:80

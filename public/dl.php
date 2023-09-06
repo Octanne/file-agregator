@@ -1,7 +1,7 @@
 <?php
 if(isset($_GET["file"])){
 
-    $rootShareFolder = getcwd()."/";
+    $rootShareFolder = getcwd()."/files/";
 
     // Get parameters
     $file = urldecode($_GET["file"]); // Decode URL-encoded string

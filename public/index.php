@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 $nameWebsite = "Octanne's files";
 $titleWebsite = "Octanne | Files";
 $footerText = "Files agregator | Made with <i class='bi bi-heart-fill'></i> by Octanne | 2020-2023";
-$rootShareFolder = getcwd()."/";
+$rootShareFolder = getcwd()."/files/";
 
 $folderIcon = <<<HTML
 <i class="bi bi-folder"></i>
@@ -19,17 +19,16 @@ $zipIcon = <<<HTML
 HTML;
 
 function icon_file($file) {
-  $extKnow = ["aac", "ai", "bmp", "cs", "css", "csv", "txt", "doc", " docx ", "exe ", "gif ", "heic", " html ", 
-              "java ", "jpg ", "js ", "json", "jsx", "key", "m4p", "md", "mov", "mp3", "mp4", "otf", "pdf", "php", 
-              "png", "ppt", "pptx", "psd", "py", "raw", "rb", "sass", "scss", "sh", "sql", "svg", "tiff", "tsx", 
+  $extKnow = ["aac", "ai", "bmp", "cs", "css", "csv", "txt", "doc", " docx ", "exe ", "gif ", "heic", " html ",
+              "java ", "jpg ", "js ", "json", "jsx", "key", "m4p", "md", "mov", "mp3", "mp4", "otf", "pdf", "php",
+              "png", "ppt", "pptx", "psd", "py", "raw", "rb", "sass", "scss", "sh", "sql", "svg", "tiff", "tsx",
               "txt", "wav", "woff", "xls", "xlsx", "xml", "yml"];
   $ext = pathinfo($file, PATHINFO_EXTENSION);
 
   if (in_array($ext, $extKnow)) $ext = "filetype-".$ext;
-  else if ($ext == "conf") $ext = "file-earmark-code";
-  else if (in_array($ext,["zip","gz","rar"])) $ext = "file-earmark-zip";
+  elseif ($ext == "conf") $ext = "file-earmark-code";
+  elseif (in_array($ext,["zip","gz","rar"])) $ext = "file-earmark-zip";
   else $ext = "file-earmark";
-
 
   return <<<HTML
     <i class="bi bi-$ext"></i>
