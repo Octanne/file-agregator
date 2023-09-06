@@ -5,5 +5,9 @@ services:
       target: php
     volumes:
       - ./files:/var/www/html/files
+    environment:
+      - TITLE=Octanne | Sharespace
+      - DESC=Octanne's sharespace for files
+      - NAME=Octanne's sharespace
     ports:
       - 80:80

@@ -1,8 +1,9 @@
 <?php
 ini_set('display_errors', 1);
 
-$nameWebsite = "Octanne's files";
-$titleWebsite = "Octanne | Files";
+$nameWebsite = getenv("NAME");
+$titleWebsite = getenv("TITLE");
+$descWebsite = getenv("DESC");
 $footerText = "Files agregator | Made with <i class='bi bi-heart-fill'></i> by Octanne | 2020-2023";
 $rootShareFolder = getcwd()."/files/";
 
@@ -156,7 +157,7 @@ echo <<<HTML
     <meta charset="utf-8">
     <title>$titleWebsite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Octanne's sharespace">
+    <meta name="description" content="$descWebsite">
     <meta name="author" content="Octanne">
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
