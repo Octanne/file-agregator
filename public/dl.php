@@ -1,4 +1,19 @@
 <?php
+
+/*
+$name = tempnam(sys_get_temp_dir(), "FOO");
+$zip = new ZipArchive;
+$res = $zip->open($name, ZipArchive::OVERWRITE); // truncate as empty file is not valid 
+if ($res === TRUE) {
+    $zip->addFile('data.txt', 'entryname.txt');
+    $zip->addEmptyDir('newDirectory')
+    $zip->close();
+    echo 'ok';
+} else {
+    echo 'failed';
+}
+*/
+
 if(isset($_GET["file"])){
 
     $rootShareFolder = getcwd()."/files/";
