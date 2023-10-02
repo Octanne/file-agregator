@@ -5,6 +5,10 @@ on:
     branches:
       - 'main'
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -35,3 +39,38 @@ jobs:
           tags: ghcr.io/octanne/file-agregator:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    name: "Update local image on server"
+    runs-on: ubuntu-latest
+    needs: [docker]
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+      
+      - name: Stop container share
+        run: ssh staging 'cd /home/corentin/docker/share/ && docker compose down'
+      - name: Stop container files
+        run: ssh staging 'cd /home/corentin/docker/files-agregator/ && docker compose down'
+      
+      - name: Pull  new image
+        run: ssh staging 'docker image pull ghcr.io/octanne/file-agregator:latest'
+        
+      - name: Start container share
+        run: ssh staging 'cd /home/corentin/docker/share/ && docker compose up -d'
+      - name: Start container files
+        run: ssh staging 'cd /home/corentin/docker/files-agregator/ && docker compose up -d'
