@@ -118,7 +118,7 @@ if ($iMax < 3) {
     if (filter_files($file)) continue;
     if (is_dir($folderAbsolute.$file)) {
       $addressToFolder = "?folder=".urlencode($pathRelative.$file);
-      $addressToSite = urlencode($pathRelative.$file);
+      $addressToSite = $pathRelative.$file;
       $folderS .= <<<HTML
         <li class="border border-dark-subtle rounded my-1 px-2 py-1 bg-body-tertiary d-flex justify-content-between file-selectable">
           <span class="flex-fill" onclick="new function() {document.location.href='$addressToFolder';};">
@@ -149,7 +149,7 @@ if ($iMax < 3) {
           </span>
           <span>
             <a data-bs-title="Download" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-              onclick="new function() { window.open('dl.php?file=$addressToFiles', '_blank'); };">
+              onclick="new function() { window.open('/dl.php?file=$addressToFiles', '_blank'); };">
               $dlIcon Download
             </a>
           </span>
