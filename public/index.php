@@ -118,6 +118,7 @@ if ($iMax < 3) {
     if (filter_files($file)) continue;
     if (is_dir($folderAbsolute.$file)) {
       $addressToFolder = "?folder=".urlencode($pathRelative.$file);
+      $addressToSite = urlencode($pathRelative.$file);
       $folderS .= <<<HTML
         <li class="border border-dark-subtle rounded my-1 px-2 py-1 bg-body-tertiary d-flex justify-content-between file-selectable">
           <span class="flex-fill" onclick="new function() {document.location.href='$addressToFolder';};">
@@ -126,13 +127,13 @@ if ($iMax < 3) {
           </span>
           <span>
             <a class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-              data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Download zipped folder" data-bs-content="Chargement..."
-              onclick="new function() { window.open('/files/$addressToFiles/', '_blank'); };">
-              $zipIcon Visit
+              data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Visit the website" data-bs-content="Chargement..."
+              onclick="new function() { window.open('/files/$addressToSite/', '_blank'); };">
+              $visitIcon Visit
             </a>
             <a class="btn btn-outline-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
               data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Download zipped folder" data-bs-content="This feature is not yet implements.">
-              $zipIcon
+              $zipIcon Compress
             </a>
           </span>
         </li>
@@ -147,7 +148,7 @@ if ($iMax < 3) {
             <span class="text-primary-emphasis">$file</span>
           </span>
           <span>
-            <a class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            <a data-bs-title="Download" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
               onclick="new function() { window.open('dl.php?file=$addressToFiles', '_blank'); };">
               $dlIcon Download
             </a>
