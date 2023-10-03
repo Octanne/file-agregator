@@ -119,6 +119,15 @@ if ($iMax < 3) {
     if (is_dir($folderAbsolute.$file)) {
       $addressToFolder = "?folder=".urlencode($pathRelative.$file);
       $addressToSite = $pathRelative.$file;
+      if (file_exists($folderAbsolute.$file."/index.html") || file_exists($folderAbsolute.$file."/index.php") || file_exists($folderAbsolute.$file."/index.js")) {
+        visit = <<<HTML
+          <a title="Visit the website" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Website" data-bs-content="Loading..."
+            onclick="new function() { window.open('/files/$addressToSite/', '_blank'); };">
+            $visitIcon Visit
+          </a>
+        HTML;
+      } else $visit = "";
       $folderS .= <<<HTML
         <li class="border border-dark-subtle rounded my-1 px-2 py-1 bg-body-tertiary d-flex justify-content-between file-selectable">
           <span class="flex-fill" onclick="new function() {document.location.href='$addressToFolder';};">
@@ -126,12 +135,8 @@ if ($iMax < 3) {
             <span class="text-warning-emphasis">$file</span>
           </span>
           <span>
-            <a class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-              data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Visit the website" data-bs-content="Chargement..."
-              onclick="new function() { window.open('/files/$addressToSite/', '_blank'); };">
-              $visitIcon Visit
-            </a>
-            <a class="btn btn-outline-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            $visit
+            <a title="Compress & Download" class="btn btn-outline-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
               data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Download zipped folder" data-bs-content="This feature is not yet implements.">
               $zipIcon Compress
             </a>
@@ -148,7 +153,12 @@ if ($iMax < 3) {
             <span class="text-primary-emphasis">$file</span>
           </span>
           <span>
-            <a data-bs-title="Download" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            <a title="Visit the website" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+              data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Website" data-bs-content="Loading..."
+              onclick="new function() { window.open('/files/$addressToFiles/', '_blank'); };">
+              $visitIcon Visit
+            </a>
+            <a title="Download" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
               onclick="new function() { window.open('/dl.php?file=$addressToFiles', '_blank'); };">
               $dlIcon Download
             </a>
