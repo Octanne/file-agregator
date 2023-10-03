@@ -146,6 +146,7 @@ if ($iMax < 3) {
     } else {
       $fileIcon = icon_file($folderAbsolute.$file);
       $addressToFiles = urlencode($pathRelative.$file);
+      $addressToFilesDirect = $pathRelative.$file;
       $folderS .= <<<HTML
         <li class="border border-dark-subtle rounded my-1 px-2 py-1 bg-body-tertiary d-flex justify-content-between file-selectable">
           <span class="flex-fill">
@@ -155,7 +156,7 @@ if ($iMax < 3) {
           <span>
             <a title="Visit the website" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
               data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Website" data-bs-content="Loading..."
-              onclick="new function() { window.open('/files/$addressToFiles/', '_blank'); };">
+              onclick="new function() { window.open('/files/$addressToFilesDirect/', '_blank'); };">
               $visitIcon Visit
             </a>
             <a title="Download" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
