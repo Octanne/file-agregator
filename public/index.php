@@ -19,6 +19,10 @@ $zipIcon = <<<HTML
 <i class="bi bi-file-zip"></i>
 HTML;
 
+$visitIcon = <<<HTML
+<i class="bi bi-globe"></i>
+HTML;
+
 function icon_file($file) {
   $extKnow = ["aac", "ai", "bmp", "cs", "css", "csv", "txt", "doc", " docx ", "exe ", "gif ", "heic", " html ",
               "java ", "jpg ", "js ", "json", "jsx", "key", "m4p", "md", "mov", "mp3", "mp4", "otf", "pdf", "php",
@@ -121,9 +125,14 @@ if ($iMax < 3) {
             <span class="text-warning-emphasis">$file</span>
           </span>
           <span>
+            <a class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+              data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Download zipped folder" data-bs-content="Chargement..."
+              onclick="new function() { window.open('/files/$addressToFiles/', '_blank'); };">
+              $zipIcon Visit
+            </a>
             <a class="btn btn-outline-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
               data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Download zipped folder" data-bs-content="This feature is not yet implements.">
-              $zipIcon Compress
+              $zipIcon
             </a>
           </span>
         </li>
