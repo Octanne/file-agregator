@@ -120,7 +120,7 @@ if ($iMax < 3) {
       $addressToFolder = "?folder=".urlencode($pathRelative.$file);
       $addressToSite = $pathRelative.$file;
       if (file_exists($folderAbsolute.$file."/index.html") || file_exists($folderAbsolute.$file."/index.php") || file_exists($folderAbsolute.$file."/index.js")) {
-        visit = <<<HTML
+        $visit = <<<HTML
           <a title="Visit the website" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
             data-bs-toggle="popover" data-bs-custom-class="custom-popover" data-bs-trigger="focus" tabindex="0" data-bs-title="Website" data-bs-content="Loading..."
             onclick="new function() { window.open('/files/$addressToSite/', '_blank'); };">
