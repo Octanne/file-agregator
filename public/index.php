@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 $nameWebsite = getenv("NAME");
 $titleWebsite = getenv("TITLE");
 $descWebsite = getenv("DESC");
-$footerText = "Files agregator | Made with <i class='bi bi-heart-fill'></i> by Octanne | 2020-2023";
+$footerText = "Files agregator | Made with <i class='bi bi-heart-fill'></i> by Octanne | 2020-2025";
 $rootShareFolder = getcwd()."/files/";
 
 $folderIcon = <<<HTML
